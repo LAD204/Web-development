@@ -27,17 +27,18 @@
         .main{
             display: flex;
             min-height: 400px;
+            width: 100%;
         }
         nav{
             flex-grow: 1;
             border-right: 1px solid #999;
             padding: 10px;
+            width: 20%;
         }
         .content{
             flex-grow: 4;
             padding: 10px;
-            display: flex;
-            justify-content: left;
+            width: 80%;
             
         }
 
@@ -52,8 +53,53 @@
         ul{
             list-style: none;
         }
-        label{
-            width: 100px;
+        p{
+            color: red;
+        }
+        table{
+            width: 100%;
+        }
+        table .formattd{
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 80px; 
+        }
+
+        table .formattd input{
+            width: 300px;
+            height: 25px;   
+        }
+        .submit-form{
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .submit-form input{
+            padding: 3px;
+            margin: 5px;
+        }
+        .nonformattd{
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            padding-right: 130px;
+        }
+        .nonformattd input{
+            padding-top: 2px;
+            margin: 2px;
+        }
+        .nonformattdhaha{
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            padding-right: 110px;
+        }
+        .nonformattdhaha input{
+            padding-top: 2px;
+            margin: 2px;
         }
     </style>
 </head>
@@ -77,46 +123,66 @@
                     <p>Thông tin tài khoản</p>
                     <table>
                         <tr>
-                            <td><label style="justify-content:left" for="email">Email</label>
-                            <input type="password" name="" id=""></td>
+                            <td class="formattd"><label  for="email">Email</label>
+                            <input type="email" name="useremail" id=""></td>
                         </tr>
                         <tr>
-                            <td><label for="">Password</label>
-                            <input type="password" name="" id=""></td>
+                            <td class="formattd"><label for="">Password</label>
+                            <input type="password" name="userpassword" id=""></td>
                         </tr>
                         <tr>
-                            <td><label for="">Nhập lại password</label>
-                            <input type="password" name="" id=""></td>
+                            <td class="formattd"><label for="">Nhập lại password</label>
+                            <input type="password" name="userpasswordagain" id=""></td>
                         </tr>
                     </table>
                     <p>Thông tin cá nhân</p>
                     <table>
                         <tr>
-                            <td><label for="name">Họ và tên</label>
-                            <input type="text" name="" id="name"></td>
+                            <td class="formattd"><label for="name">Họ và tên</label>
+                            <input class="nonformat-input" type="text" name="username" id="name"></td>
                         </tr>
                         <tr>
-                            <td><label for="quequan">Quê quán</label>
-                            <input type="text" name="" id="quequan"></td>
+                            <td class="formattd"><label for="quequan">Quê quán</label>
+                                <select style="width: 55.6%;" name="usercity" id="city">
+                                    <option value="" disable selected>-- Vui lòng chọn --</option>
+                                    <option value="Hà Nội">Hà Nội</option>
+                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option> 
+                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
-                            <td><label for="dienthoai">Điện thoại</label>
-                            <input type="text" name="" id="dienthoai"></td>
+                            <td class="formattd"><label for="dienthoai">Điện thoại</label>
+                            <input class="nonformat-input" type="tel" name="usertel" id="dienthoai"></td>
                         </tr>
                         <tr>
-                            <td><label for="gioitinh">Giới tính</label>
-                            <input type="text" name="" id="gioitinh"></td>
+                            <td class="nonformattd"><label for="gioitinh">Giới tính</label>
+                                <label for="">
+                                    <input type="radio" name="usergender" id="gioitinh" value="Nam"> Nam
+                                    <input type="radio" name="usergender" id="gioitinh" value="Nam"> Nữ
+                                </label>
+                            </td>
                         </tr>
                         <tr>
-                            <td><label for="sothich">Sở thích</label>
-                            <input type="text" name="" id="sothich"></td>
+                            <td class="nonformattdhaha"><label for="sothich">Sở thích</label>
+                                <label for="">
+                                    <input type="checkbox" name="userhobbies[]"  value="Màu xanh"> Màu xanh
+                                    <input type="checkbox" name="userhobbies[]"  value="Màu đỏ"> Màu đỏ
+                                    <input type="checkbox" name="userhobbies[]"  value="Đồng quê"> Đồng quê
+                                    <input type="checkbox" name="userhobbies[]"  value="Cao nguyên"> Cao nguyên
+                                </label>
+                            </td>
                         </tr>
                     </table>
+                    <div class="submit-form">
+                        <input style="padding: 5px 15px 5px 15px; background-color: blue; color: white; " type="submit" value="Đăng ký">
+                        <input type="reset" value="Làm lại">
+                    </div>
                 </form>
             </div>
         </div>
         <footer>
-            <h2>FOOTER WEVSITE</h2>
+            <h2>FOOTER WEBSITE</h2>
         </footer>
     </div>
 </body>
