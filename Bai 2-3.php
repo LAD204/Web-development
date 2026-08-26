@@ -39,8 +39,12 @@
     </style>
 </head>
 <body>
+    <?php
+     include ('tinhtoan.php');
+     $p = new pheptinh();
+    ?>
     <div class="container">
-        <form action="tinhtoan.php" method="post">
+        <form action="" method="post">
             <table>
                 <tr>
                     <td>
@@ -56,6 +60,31 @@
                         <input class="button" type="submit" value="-" name="phep">
                         <input class="button" type="submit" value="*" name="phep">
                         <input class="button" type="submit" value="/" name="phep">
+                    </td>
+                    <td>
+                        Kết quả là: 
+                        <?php
+                            $a = $_REQUEST['giatria'];
+                            $b = $_REQUEST['giatrib'];
+                            switch($_POST['phep']){
+                                case '+':{
+                                    echo $p->tinhcong($a, $b);
+                                    break;
+                                }
+                                case '-':{
+                                    echo $p->tinhtru($a, $b);
+                                    break;
+                                }
+                                case '*':{
+                                    echo $p->tinhnhan($a, $b);
+                                    break;
+                                }
+                                case '/':{
+                                    echo $p->tinhchia($a, $b);
+                                    break;
+                                }
+                            }
+                        ?>
                     </td>
                 </tr>
             </table>
