@@ -20,50 +20,60 @@
             width: 100%;
         }
         .form{
-            display flex;
+            display: flex;
             height: 300px;
             width: 200px;
             border: 1px solid black;
         }
         .result{
             border: 1px solid black;
+            display: flex;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="file" name="picture" id="">
-            <input type="submit" name="upload" value="Upload file">  
+            <input type="file" name="file[]" id="" multiple required>
+            <input type="submit" name="sbupload" value="Upload file">  
         </form>
         <br>
         <h1>Ket qua sau khi upload file</h1>
         <div class="result">
             <?php
-                if(isset($_POST["upload"])){
-                    if(isset($_FILES["picture"]) && !$_FILES["picture"]["error"]){
-                        // hiển thị tên file 
-                        $tenanh = $_FILES["picture"]["name"];
-                        echo "<br>";
-                        echo "Tên file ban đầu: ".$tenanh;
-                        echo "<br>";
-                        // hiển thị tên file thay đổi
-                        $duoifile = pathinfo($_FILES["picture"]["name"], PATHINFO_EXTENSION);
-                        $tenanhmoi = "anhdep"."_".rand(100, 999).".".$duoifile;
-                        echo "Tên file thay đổi: ".$tenanhmoi;
-                        echo "<br>";
-                        // hiển thị kích thước file
-                        $kichthuocfile = $_FILES["picture"]["size"];
-                        echo "Kích thước: ".$kichthuocfile;
-                        echo "<br>";
-                        // hiển thị loại file
-                        $loaifile = $_FILES["picture"]["type"];
-                        echo "Loại file: ".$loaifile;
-                        echo "<br>";
-                        // hiển thị đường dẫn file tạm
-                        $tmp = $_FILES["picture"]["tmp_name"];
-                        echo "Tên file tạm: ".$tmp;
-                        echo "<br>";
+                if(isset($_POST["sbupload"]) && isset($_FILES["file"])){
+                    for($i = 0; $i < count($_FILES["file"]["name"]); $i++){
+                        echo '<div style = " border: 1px solid #c9c9c9; padding: 10px; height: 300px; margin: 5px;">';
+
+                        $name_new = pathinfo($_FILES["file"]["name"][$i], PATHINFO_FILENAME). "_" . rand(100, 999);
+
+                        $ext = pathinfo($_FILES["file"]["name"][$i], PATHINFO_EXTENSION);
+
+                        $filename_new = $name_new . "." .$ext;
+
+                        echo "Ten file ban dau: ".$_FILES["file"]["name"][$i];
+
+                        echo "<br/> Ten file thay doi: ".$filename_new;
+
+                        echo "<br/> Kich thuoc: ".round($_FILES["file"]["size"][$i]/1024)." KB";
+
+                        echo "<br/> Loai file: ". $_FILES["file"]["type"][$i];
+
+                        echo "<br /> Ten file tam: ".$_FILES["file"]["tmp_name"][$i];
+
+                        echo "<p/>";
+
+                        if($_FILES["file"]["error"][$i]> 0){
+                            echo "Loi trong qua trinh upload";
+                        }else{
+                            move_uploaded_file($_FILES["file"]["tmp_name"][$i], "uploads/".$filename_new);
+                            if($ext == 'png' || $ext == 'jpg' || $ext == 'gif'){
+                                echo '<img src="uploads/'.$filename_new.'" width="200">';
+                            }else{
+                                echo 'Khong phai file anh';
+                            }
+                        }
+                        echo '</div>';
                     }
                 }
             ?>
