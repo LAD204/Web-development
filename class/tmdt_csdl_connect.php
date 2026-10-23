@@ -1,7 +1,7 @@
 <?php
     class csdl{
         private function connect(){
-            $con = mysqli_connect('localhost', 'usertmdt', 'passtmdt', 'tmdt_db');
+            $con = mysqli_connect('localhost', 'root', '', 'tmdt_db');
             if(!$con){
                 echo 'Không thể kết nối';
                 exit();
@@ -37,6 +37,17 @@
                         </tr>
                     ';
                 }
+            }
+        }
+
+        public function ketqua(string $sql){
+            $link = $this->connect();
+            $result = $link->query($sql);
+            if($result->num_rows>0){
+                return $result;
+            }
+            else{
+                echo 'Không khả dụng';
             }
         }
     }

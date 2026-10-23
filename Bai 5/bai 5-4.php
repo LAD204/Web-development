@@ -1,5 +1,5 @@
 <?php
-    include("../classbai5/tmdt_csdl_connect.php");
+    include("../class/tmdt_csdl_connect.php");
     $p = new csdl();
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
         <thead align="center">
             <tr align="center">
                 <td align="center">
-                    ID công ty
+                    STT
                 </td>
                 <td align="center">
                     Tên công ty
