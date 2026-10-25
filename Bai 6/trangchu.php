@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header('location:login.php');
+        exit();
+    }
     include('../class/classsanpham.php');
     $p = new sanpham();
 ?>
@@ -19,7 +24,7 @@
             <nav>
                 MENU
                 <ul align="left">
-                    <li><a href="http://">Trang chủ</a></li>
+                    <li><a href="trangchu.php">Trang chủ</a></li>
                     <li><a href="http://">Công ty</a></li>
                     <li><a href="http://">Điện thoại Apple</a></li>
                     <li><a href="http://">Điện thoại Samsumg</a></li>

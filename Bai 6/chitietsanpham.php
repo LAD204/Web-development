@@ -32,7 +32,7 @@
                     <li><a href="http://">Điện thoại Apple</a></li>
                     <li><a href="http://">Điện thoại Samsumg</a></li>
                     <li><a href="http://">Điện thoại Xiaomi</a></li>
-                    <li><a href="http://">Xuất </a></li>
+                    <li><a href="../Bai 5/bai 5-4.php">Xuất danh sách công ty</a></li>
                 </ul>
             </nav>
             <div class="chitietsanpham-content">

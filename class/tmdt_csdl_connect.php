@@ -47,7 +47,7 @@
                 return $result;
             }
             else{
-                echo 'Không khả dụng';
+                return 0;
             }
         }
     }
