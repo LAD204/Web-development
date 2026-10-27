@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header('location:login.php');
+        exit();
+    }
     if(isset($_GET['idsp']) & isset($_GET['idcty'])){
         $idsp = (int)$_GET['idsp'];
         $idcty = (int)$_GET['idcty'];
@@ -28,17 +33,30 @@
                 MENU
                 <ul align="left">
                     <li><a href="trangchu.php">Trang chủ</a></li>
-                    <li><a href="http://">Công ty</a></li>
-                    <li><a href="http://">Điện thoại Apple</a></li>
-                    <li><a href="http://">Điện thoại Samsumg</a></li>
-                    <li><a href="http://">Điện thoại Xiaomi</a></li>
-                    <li><a href="../Bai 5/bai 5-4.php">Xuất danh sách công ty</a></li>
+                    <li><a href="../Bai 5/bai 5-4.php">Công ty</a></li>
+                    <li><a href="chitietsanpham.php?idcty=7">Điện thoại Apple</a></li>
+                    <li><a href="chitietsanpham.php?idcty=8">Điện thoại Samsumg</a></li>
+                    <li><a href="chitietsanpham.php?idcty=9">Điện thoại Xiaomi</a></li>
                 </ul>
             </nav>
             <div class="chitietsanpham-content">
                 <div class="title"><h4>CHI TIẾT SẢN PHẨM</h4></div>
                 <?php 
                     $p->chiTietSanPham($idsp, $idcty);
+                    if(isset($_POST['order'])){
+                        if(isset($_SESSION['user'])){
+                            switch($_POST['order']){
+                                case 'Đặt hàng':{
+                                    echo '<script>alert("Đặt hàng thành công");</script>';
+                                    break;
+                                }
+                            }
+                        }
+                        else{
+                            header('location:login.php');
+                            exit();
+                        }
+                    }
                 ?>
             </div>
         </div>

@@ -16,11 +16,12 @@
             $link = $this->connect();
             $result = mysqli_query($link, $sql);
             if($result->num_rows > 0){
-                while($row = mysqli_fetch_assoc($result)){
+                for ($i = 1; $i < $result->num_rows; $i ++){
+                    $row = mysqli_fetch_array($result);
                     echo '
                         <tr align="center">
                             <td align="center">
-                                '.$row['idcty'].'
+                                '.$i.'
                             </td>
                             <td align="center">
                                 '.$row['tencty'].'
@@ -45,6 +46,16 @@
             $result = $link->query($sql);
             if($result->num_rows>0){
                 return $result;
+            }
+            else{
+                return 0;
+            }
+        }
+
+        public function thucthisql(string $sql){
+            $link = $this->connect();
+            if($link->query($sql)){
+                return 1;
             }
             else{
                 return 0;

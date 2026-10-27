@@ -1,47 +1,44 @@
 <?php
-    include('tmdt_csdl_connect.php');
-    class mylogin extends csdl{
-        public function checklogin(string $username, string $password){
-            $username = trim($username);
-            $password = trim($password);
+include("tmdt_csdl_connect.php");
+class login extends csdl
+{
 
-            $result = $this->ketqua("select * from taikhoan where username = '".$username."'");
+    public function mylogin($user,$pass)
+    {
+        $pass=md5($pass);
+        $sql="select iduser, username, password from TAIKHOAN where username='$user' and password='$pass' limit 1";
+        $result=$this->ketqua($sql);
+        if($result != 0)
+        {   
+            session_start();
+            $row=$result->fetch_assoc();
+            $id=$row['iduser'];
+            $username=$row['username'];
+            $password=$row['password'];
+            $phanquyen=$row['phanquyen'];
 
-            if($result !== 0){
-                $row = mysqli_fetch_assoc($result);
-                if($password !== '' && $password === $row['password']){
-                    session_start();
-                    $_SESSION['user'] = $username;
-                    $_SESSION['password'] = $password;
-                    header('location:../Bai 6/trangchu.php');
-                    exit();
-                }
-            }
-            echo '<script>alert("Tài khoản hoặc mật khẩu sai");</script>';
-            return 0;
+            $_SESSION['id']=$id;
+            $_SESSION['user']=$username;
+            $_SESSION['pass']=$password;
+            $_SESSION['phanquyen']=$phanquyen;
+
+            return 1;
         }
-
-        public function confirmlogin(string $username, string $password){
-            $username = trim($username);
-            $password = trim($password);
-
-            $result = $this->ketqua("select * from taikhoan where username = '".$username."'");
-
-            if($result !== 0){
-                $row = mysqli_fetch_assoc($result);
-
-                if($password !== '' && $password === $row['password']){
-                    if(session_status() === PHP_SESSION_NONE){
-                        session_start();
-                    }
-                    $_SESSION['user'] = $username;
-                    header('location:../Bai 6/trangchu.php');
-                    exit();
-                }
-            }
-
-            echo '<script>alert("Tài khoản hoặc mật khẩu sai");</script>';
+        else
+        {
             return 0;
         }
     }
+
+    function confirmlogin($id,$user,$pass,$phanquyen)
+    {
+        $sql="select iduser from taikhoan where iduser='$id' and username='$user' and password='$pass' and phanquyen='$phanquyen' limit 1";
+        $result=$this->ketqua($sql);
+        $num=$result->num_rows;
+        if($num!=1)
+        {
+            header('location:../login/login.php');
+        }
+    }
+}
 ?>

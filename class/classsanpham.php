@@ -14,10 +14,6 @@
             }
         }
 
-        public function xuatDuLieuCTy(){
-            $result = $this->ketqua("select * from congty order by idcty asc");
-        }
-
         public function chiTietSanPham(int $idsp, int $idcty){
             $result = $this->ketqua("select * from sanpham where idsp = '$idsp'");
             $idcongty = $this->ketqua("select * from congty where idcty = '$idcty'");
@@ -27,7 +23,7 @@
                 <div class="chitietsanpham">
                     <div class="anhminhhoa"><img src="../storage/'.$row['hinh'].'" alt=""></div>
                     <div class="motasanpham">
-                        <form action="" method="get">
+                        <form action="" method="post">
                             <table>
                                 <tr>
                                     <td>
@@ -57,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="submit" value="Đặt hàng">
+                                        <input type="submit" name="order" value="Đặt hàng">
                                     </td>
                                 </tr>
                                 <tr>
@@ -71,6 +67,24 @@
                 </div>
 
             ';
+        }
+
+        public function xuatDanhSachSanPhamTheoCty(string $idcty){
+            $result = $this->ketqua("select * from sanpham where idcty = '$idcty'");
+            if($result->num_rows > 0){
+                while($row=mysqli_fetch_assoc($result)){
+                    echo '
+                        <div class="product-card" >
+                            <div class="tensp"><h6>'.$row['tensp'].'</h6></div>
+                            <div class="hinh"><a href="../Bai 6/chitietsanpham.php?idsp='.$row['idsp'].'&idcty='.$row['idcty'].'"><img src="../storage/'.$row['hinh'].'" alt="'.$row['tensp'].'" srcset=""></a></div>
+                            <div class="gia"><h6>Giá: '.$row['gia'].'$</h6></div>
+                        </div>
+                    ';
+                }
+            }
+            else{
+                echo '<span align="center">Không tìm thấy sản phẩm</span>';
+            }
         }
     } 
 ?>

@@ -1,8 +1,9 @@
 <?php
     session_start();
-    if(!isset($_SESSION['user'])){
-        header('location:login.php');
-        exit();
+    if(isset($_SESSION['id']) && isset($_SESSION['user']) && isset($_SESSION['pass']) && isset($_SESSION['phanquyen'])){
+        include('../class/clslogin.php');
+        $p = new login();
+        $p->confirmlogin($_SESSION['id'], $_SESSION['user'], $_SESSION['pass'], $_SESSION['phanquyen']);
     }
     include('../class/classsanpham.php');
     $p = new sanpham();
@@ -25,16 +26,20 @@
                 MENU
                 <ul align="left">
                     <li><a href="trangchu.php">Trang chủ</a></li>
-                    <li><a href="http://">Công ty</a></li>
-                    <li><a href="http://">Điện thoại Apple</a></li>
-                    <li><a href="http://">Điện thoại Samsumg</a></li>
-                    <li><a href="http://">Điện thoại Xiaomi</a></li>
-                    <li><a href="../Bai 5/bai 5-4.php">Xuất danh sách công ty</a></li>
+                    <li><a href="../Bai 5/bai 5-4.php">Công ty</a></li>
+                    <li><a href="trangchu.php?idcty=7">Điện thoại Apple</a></li>
+                    <li><a href="trangchu.php?idcty=8">Điện thoại Samsumg</a></li>
+                    <li><a href="trangchu.php?idcty=9">Điện thoại Xiaomi</a></li>
                 </ul>
             </nav>
             <div class="sanpham-content">
                 <?php
-                    $p->xuatsanpham();
+                    if(isset($_GET['idcty'])){
+                        $p->xuatDanhSachSanPhamTheoCty($_GET['idcty']);
+                    }
+                    else{
+                        $p->xuatsanpham();
+                    }
                 ?>
             </div>
         </div>

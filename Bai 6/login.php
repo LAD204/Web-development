@@ -1,6 +1,6 @@
 <?php
     include('../class/clslogin.php');
-    $p = new mylogin();
+    $p = new login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,13 @@
                     case 'Đăng nhập':{
                         $username = $_POST['username'];
                         $password = $_POST['password'];
-                        $p->checklogin($username, $password);
+                        if($p->mylogin($username, $password)==1){
+                            header('location:trangchu.php');
+                            exit();
+                        }
+                        else{
+                            echo'<script>alert("Đăng nhập thất bại. Tài khoản hoặc mật khẩu bị sai");</script>';
+                        }
                         break;
                     }
                 }
