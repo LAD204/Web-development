@@ -7,7 +7,7 @@
     if(isset($_GET['idsp']) & isset($_GET['idcty'])){
         $idsp = (int)$_GET['idsp'];
         $idcty = (int)$_GET['idcty'];
-        include('../class/classsanpham.php');
+        include_once('../class/classsanpham.php');
         $p = new sanpham();
     }
     else{
@@ -42,12 +42,14 @@
             <div class="chitietsanpham-content">
                 <div class="title"><h4>CHI TIẾT SẢN PHẨM</h4></div>
                 <?php 
-                    $p->chiTietSanPham($idsp, $idcty);
+                    $p->chiTietSanPham($idsp, $idcty);        
                     if(isset($_POST['order'])){
                         if(isset($_SESSION['user'])){
                             switch($_POST['order']){
                                 case 'Đặt hàng':{
-                                    echo '<script>alert("Đặt hàng thành công");</script>';
+                                    $idkhachhang = $_SESSION['id'];
+                                    $idsanpham = $_SESSION['idsp'];
+                                     
                                     break;
                                 }
                             }

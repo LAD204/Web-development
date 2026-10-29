@@ -1,5 +1,5 @@
 <?php
-    include('tmdt_csdl_connect.php');
+    include_once('tmdt_csdl_connect.php');
     class sanpham extends csdl{
         public function xuatsanpham(){
             $result = $this->ketqua('select * from sanpham order by gia asc');
@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>
                                         <label for=""><strong>Số lượng: </strong></label>
-                                        <input type="number" name="" id="" value="'.$row['soluong'].'" style="width: 50px;">
+                                        <input type="number" name="soluong" min="1" max = "'.$row['soluong'].'" id="" value="1" style="width: 50px;">
                                     </td>
                                 </tr>
                                 <tr>

@@ -1,11 +1,15 @@
 <?php
     session_start();
     if(isset($_SESSION['id']) && isset($_SESSION['user']) && isset($_SESSION['pass']) && isset($_SESSION['phanquyen'])){
-        include('../class/clslogin.php');
+        include_once('../class/clslogin.php');
         $p = new login();
         $p->confirmlogin($_SESSION['id'], $_SESSION['user'], $_SESSION['pass'], $_SESSION['phanquyen']);
     }
-    include('../class/classsanpham.php');
+    else{
+        header('location:login.php');
+        exit();
+    }
+    include_once('../class/classsanpham.php');
     $p = new sanpham();
 ?>
 <!DOCTYPE html>

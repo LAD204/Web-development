@@ -1,5 +1,5 @@
 <?php
-    include('../class/clslogin.php');
+    include_once('../class/clslogin.php');
     $p = new login();
 ?>
 <!DOCTYPE html>

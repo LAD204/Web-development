@@ -1,5 +1,5 @@
 <?php
-    include("../class/tmdt_csdl_connect.php");
+    include_once("../class/tmdt_csdl_connect.php");
     $p = new csdl();
 ?>
 <!DOCTYPE html>

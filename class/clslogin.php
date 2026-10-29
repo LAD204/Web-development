@@ -1,12 +1,12 @@
 <?php
-include("tmdt_csdl_connect.php");
+include_once("tmdt_csdl_connect.php");
 class login extends csdl
 {
 
     public function mylogin($user,$pass)
     {
         $pass=md5($pass);
-        $sql="select iduser, username, password from TAIKHOAN where username='$user' and password='$pass' limit 1";
+        $sql="select iduser, username, password, phanquyen from TAIKHOAN where username='$user' and password='$pass' limit 1";
         $result=$this->ketqua($sql);
         if($result != 0)
         {   
@@ -30,7 +30,7 @@ class login extends csdl
         }
     }
 
-    function confirmlogin($id,$user,$pass,$phanquyen)
+    public function confirmlogin($id,$user,$pass,$phanquyen)
     {
         $sql="select iduser from taikhoan where iduser='$id' and username='$user' and password='$pass' and phanquyen='$phanquyen' limit 1";
         $result=$this->ketqua($sql);
@@ -38,6 +38,7 @@ class login extends csdl
         if($num!=1)
         {
             header('location:../login/login.php');
+            exit();
         }
     }
 }
